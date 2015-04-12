@@ -4,7 +4,7 @@ Unix has a `date` command which takes a format string and outputs the current da
 
 This little project is to create something similar to the unix date command, for windows, allowing the current date to be output in various formats supported by the `strftime` system function.
 
-It is not exactly equivalent to the unix `date` command, but suit my purpose, which was mainly to output the date in the simple number form YYYYMMDD for say dating archives. This can be done by `dt5 "+%Y%m%d"`.
+It is not exactly equivalent to the unix `date` command, but suits my purpose, which was mainly to output the date in the simple number form YYYYMMDD for say dating archives. This can be done by `dt5 "+%Y%m%d"`.
 
 #### Building:
 
