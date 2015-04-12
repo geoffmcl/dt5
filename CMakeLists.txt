@@ -74,6 +74,10 @@ if (MSVC)
     set_target_properties( ${name} PROPERTIES DEBUG_POSTFIX d )
 endif ()
 # deal with install, if any...
-install( TARGETS ${name} DESTINATION ${CMAKE_INSTALL_PREFIX} )
+if (WIN32)
+    install( TARGETS ${name} DESTINATION ${CMAKE_INSTALL_PREFIX} )
+else ()
+    install( TARGETS ${name} DESTINATION bin )
+endif ()
 
 # eof
