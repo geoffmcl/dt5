@@ -17,7 +17,13 @@
 #include <string.h>
 #include <stdint.h>
 
+#ifndef DT5_VERSION
+#define DT5_VERSION "5.0.1"
+#endif
+
 static const char *time_format = "%Y/%m/%d %H:%M:%S";
+static const char *log_form = "%a %b %d, %H:%M:%S %z %Y";
+
 /* ===================
    The time that is returned represents the number of seconds elapsed 
    since 00:00 hours, Jan 1, 1970 UTC. It’s also called UNIX EPOCH time.
@@ -469,10 +475,16 @@ int show_ms_example()
 }
 #endif
 
+void show_version()
+{
+    printf("Version " DT5_VERSION "\n");
+}
+
 void give_help( char * name )
 {
     char buffer[128];
     printf("Usage: %s [options] [+time format]\n", name );
+    show_version();
     printf(" The time format, if given is a string commencing with a '+' char,\n");
     printf(" followed by one or more of the following... other chars are printed as is\n");
     PFORM pf = sForm;
@@ -486,6 +498,7 @@ void give_help( char * name )
         pf++;
     }
     fprintf(stdout, "The default format is \"+%s\"\n", time_format);
+    fprintf(stdout, "For 'Mon Oct 26, 02:46:27 (TZ) 2015' use \"+%s\"\n", log_form);
 }
 
 // 20121226 - add a +%N switch to output nanosecs
@@ -509,6 +522,9 @@ int main(int argc, char **argv )
                 c = *sarg;
                 if ((c == 'h')||(c == '?')) {
                     give_help(argv[0]);
+                    return 0;
+                } else if (c == 'v') {
+                    show_version();
                     return 0;
                 } else {
                     printf("Unknown commad '%s'!\n", arg );
